@@ -12,7 +12,7 @@ class UkladRownanLiniowych {
   /*
    *  Tutaj trzeba wstawic definicje odpowiednich pol i metod prywatnych
    */
-  MacierzKw A;
+  Macierz A;
   Wektor B;
   public:
   /*
@@ -22,7 +22,7 @@ class UkladRownanLiniowych {
   UkladRownanLiniowych(MacierzKw AA, Wektor BB);
   Wektor Oblicz(); //obl gauss/cramer
   void zmien_macierz(MacierzKw M);
-  MacierzKw wez_macierz();
+  Macierz wez_macierz();
   void zmien_wektor(Wektor W);
   Wektor wez_wektor();
 };

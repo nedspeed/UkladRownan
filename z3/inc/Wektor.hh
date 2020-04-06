@@ -2,7 +2,7 @@
 #define WEKTOR_HH
 #include "rozmiar.h"
 #include <iostream>
-
+#include <cmath>
 
 /*
  *  Tutaj trzeba opisac klase. Jakie pojecie modeluje ta klasa
@@ -21,19 +21,13 @@ double dane[ROZMIAR];
    *  Tutaj trzeba wstawic definicje odpowiednich metod publicznych
    */    
   Wektor();
-  Wektor(double x, double y, double z); //konstruktor od kolekcji
+  Wektor(double dane[ROZMIAR]); //konstruktor od kolekcji
   double dlugosc() const;
   double operator *(const Wektor &W2) const;
   const Wektor & operator + (const Wektor &W2) const;
   const Wektor & operator - (const Wektor &W2) const;
   const double & operator [] (int indeks) const;
-  double & operator [] (int indeks){
-  if (indeks < 0 || indeks > ROZMIAR)
-  {
-    cerr << "Blad, zly indeks wektora";
-    exit(1);
-  }
-  }
+  double & operator [] (int indeks);
   //x,y,z
   //void set_x(double xx);
  // void set_y(double yy);
@@ -45,9 +39,8 @@ double dane[ROZMIAR];
 };
 /*Wektor W;
 W[2];
-
-Wc.dlugosc();
 const Wektor Wc;
+Wc.dlugosc();
 Wc[2]=2;
 double b = Wc[2]; */
 /*
@@ -57,7 +50,7 @@ double b = Wc[2]; */
  * znalezc w pliku:
  *    ~bk/edu/kpo/zalecenia.txt 
  */
-std::istream& operator >> (std::istream &Strm, Wektor &Wek);
+std::istream& operator >> (std::istream &Strm, Wektor &W);
 
 /*
  * To przeciazenie trzeba opisac. Co ono robi. Jaki format
@@ -66,6 +59,6 @@ std::istream& operator >> (std::istream &Strm, Wektor &Wek);
  * znalezc w pliku:
  *    ~bk/edu/kpo/zalecenia.txt 
  */
-std::ostream& operator << (std::ostream &Strm, const Wektor &Wek);
+std::ostream& operator << (std::ostream &Strm, const Wektor &W);
 
 #endif
