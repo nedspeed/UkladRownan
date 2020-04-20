@@ -20,22 +20,14 @@ double dane[ROZMIAR];
   /*
    *  Tutaj trzeba wstawic definicje odpowiednich metod publicznych
    */    
-  Wektor();
+  Wektor() = default;
   Wektor(double dane[ROZMIAR]); //konstruktor od kolekcji
-  double dlugosc() const;
-  double operator *(const Wektor &W2) const;
-  const Wektor & operator + (const Wektor &W2) const;
-  const Wektor & operator - (const Wektor &W2) const;
-  const double & operator [] (int indeks) const;
-  double & operator [] (int indeks);
-  //x,y,z
-  //void set_x(double xx);
- // void set_y(double yy);
- // ...
- // double get_x();
-//...
-
-
+  double dlugosc() const;  //metoda obliczajca dlugosc wektora
+  double operator *(const Wektor &W2) const;  //przeciazenie mnozenia wektor razy wektor
+  Wektor operator + (const Wektor &W2) const; //przeciazenie dodawania wektorow
+  Wektor operator - (const Wektor &W2) const; //przeciazenie odejmowania wektorow
+  const double & operator [] (int indeks) const; //przeciazenie operatora indeksowania dla wektora typu const
+  double & operator [] (int indeks); //przeciazenie operatora indeksowania dla wektora dowolnego typu
 };
 /*Wektor W;
 W[2];
@@ -49,6 +41,10 @@ double b = Wc[2]; */
  * Szczegoly dotyczace zalecen realizacji opisow mozna
  * znalezc w pliku:
  *    ~bk/edu/kpo/zalecenia.txt 
+ * Przeciazenie operatora przesuniecia bitowego w prawo,
+ * za pierwszy argument bierze dana komende(np. cin) ze
+ * strumienia wejsciowego z biblioteki std, 
+ * a za drugi argument bierze podana macierz.
  */
 std::istream& operator >> (std::istream &Strm, Wektor &W);
 
@@ -58,6 +54,10 @@ std::istream& operator >> (std::istream &Strm, Wektor &W);
  * Szczegoly dotyczace zalecen realizacji opisow mozna
  * znalezc w pliku:
  *    ~bk/edu/kpo/zalecenia.txt 
+ * Przeciazenie operatora przesuniecia bitowego w lewo,
+ * za pierwszy argument bierze dana komende(np. cout) ze
+ * strumienia wyjsciowego biblioteki std,
+ * a za drugi argument bierze podana macierz.
  */
 std::ostream& operator << (std::ostream &Strm, const Wektor &W);
 

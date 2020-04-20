@@ -1,8 +1,9 @@
 #ifndef UKLADROWNANLINIOWYCH_HH
 #define UKLADROWNANLINIOWYCH_HH
-
+#include "Wektor.hh"
+#include "Macierz.hh"
 #include <iostream>
-
+#include "rozmiar.h"
 
 /*
  *  Tutaj trzeba opisac klase. Jakie pojecie modeluje ta klasa
@@ -12,19 +13,25 @@ class UkladRownanLiniowych {
   /*
    *  Tutaj trzeba wstawic definicje odpowiednich pol i metod prywatnych
    */
-  Macierz A;
-  Wektor B;
+  Macierz Wsp; //macierz wspolczynnikow
+  Wektor Wol; //Wol - wektor wyrazow wolnych
+   //Rozw - rozwiazan, Blad - wektor bledu, Wyzn - wyznacznikow posrednich
+   //WzG - WyznacznikGlowny, L - dlugosc wektora
   public:
   /*
    *  Tutaj trzeba wstawic definicje odpowiednich metod publicznych
    */    
-  UkladRownanLiniowych();
-  UkladRownanLiniowych(MacierzKw AA, Wektor BB);
-  Wektor Oblicz(); //obl gauss/cramer
-  void zmien_macierz(MacierzKw M);
-  Macierz wez_macierz();
-  void zmien_wektor(Wektor W);
-  Wektor wez_wektor();
+  UkladRownanLiniowych();  //konstruktor domyslny
+  UkladRownanLiniowych(Macierz AA, Wektor BB); //konstruktor
+
+  Wektor WyznKram();
+  Wektor RozwUkl() const;
+  Wektor LiczBlad(Wektor Rozw);
+  const Wektor wez_wektor()const;
+  const Macierz wez_macierz() const;
+  void zmien_wektor(Wektor Wej);
+  void zmien_macierz(Macierz We);
+  void zmien_kolumne(int i, Wektor We, Macierz W) const;
 };
 
 
@@ -44,9 +51,7 @@ std::istream& operator >> (std::istream &Strm, UkladRownanLiniowych &UklRown);
  * znalezc w pliku:
  *    ~bk/edu/kpo/zalecenia.txt 
  */
-std::ostream& operator << ( std::ostream                  &Strm, 
-                            const UkladRownanLiniowych    &UklRown
-                          );
+std::ostream& operator << ( std::ostream &Strm, const UkladRownanLiniowych &UklRown);
 
 
 #endif

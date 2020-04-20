@@ -7,10 +7,24 @@ using namespace std;
  *  niz dwie linijki.
  *  Mniejsze metody mozna definiwac w ciele klasy.
  */
+/*
+ * Metoda klasy wektor obliczajaca 
+ * dlugosc danego wektora.
+ */
 double Wektor::dlugosc() const{
-return sqrt((this->dane[0]*this->dane[0])+(this->dane[1]*this->dane[1])+(this->dane[2]*this->dane[2]));
+  double Wynik;
+  double tmp;
+  for( int i = 0; i < ROZMIAR; i++){
+  tmp += this->dane[i]*this->dane[i];
+}
+Wynik = sqrt(tmp);
+return Wynik;
 }
   
+/*
+ * Metoda przeciazajaca operacje
+ * mnozenia wektora przez wektor.
+ */
   double Wektor::operator * (const Wektor &W2) const{
       double Wynik = 0;
 for(int i = 0; i < ROZMIAR; i++)
@@ -18,44 +32,74 @@ for(int i = 0; i < ROZMIAR; i++)
 return Wynik;
   }
 
-  const Wektor & Wektor::operator + (const Wektor &W2) const{
+/*
+ * Metoda przeciazajaca operacje
+ * dodawania do siebie dwoch wektorow.
+ */
+  Wektor Wektor::operator + (const Wektor &W2) const{
       Wektor Wynik;
 for(int i = 0; i < ROZMIAR; i++)
     Wynik.dane[i] = this->dane[i] + W2.dane[i];
 return Wynik;
   }
   
-  const Wektor & Wektor::operator - (const Wektor &W2) const{
+/*
+ * Metoda przeciazajaca operacje
+ * odejmowania od siebie dwoch wektorow.
+ */
+  Wektor Wektor::operator - (const Wektor &W2) const{
       Wektor Wynik;
 for(int i = 0; i < ROZMIAR; i++)
     Wynik.dane[i] = this->dane[i] - W2.dane[i];
 return Wynik;
   }
 
-  const double & Wektor::operator [] (double indeks) const{
+/*
+ * Metoda przeciazajaca operator []
+ * indeksowania dla wektora typu const.
+ */
+  const double & Wektor::operator [] (int indeks) const{
   if (indeks < 0 || indeks > ROZMIAR)
   {
     cerr << "Blad, zly indeks wektora";
     exit(1);
   }
-  return indeks == 0 ? this->dane[0] : indeks == 1 ? this->dane[1] : this->dane[2];
+    return dane[indeks];
   }
 
-  double & Wektor::operator [] (double indeks){
+/*
+ * Metoda przeciazajaca operator []
+ * indeksowania dla wektora dowolnego typu.
+ */
+  double & Wektor::operator [] (int indeks){
   if (indeks < 0 || indeks > ROZMIAR)
   {
     cerr << "Blad, zly indeks wektora";
     exit(1);
   }
-  return indeks == 0 ? this->dane[0] : indeks == 1 ? this->dane[1] : this->dane[2];
+    return dane[indeks];
   }
 
+/*
+ * Funkcja przeciazajaca operator
+ * przesuniecia bitowego w prawo.
+ */
   std::istream& operator >> (std::istream &Strm, Wektor &W){
-      for(int i = 0; i < ROZMIAR; i++)
-      return Strm >> W.dane[i];
+      for(int i = 0; i < ROZMIAR; i++){
+        Strm>>W[i];
+      }
+
+      return Strm;
   }
 
+/*
+ * Funkcja przeciazajaca operator
+ * przesuniecia bitowego w lewo.
+ */
   std::ostream& operator << (std::ostream &Strm, const Wektor &W){
-      for(int i = 0; i < ROZMIAR; i++)
-      return Strm << '|' << Strm << W.dane[i] << Strm << '|';
+      for(int i = 0; i < ROZMIAR; i++){
+        Strm << W[i];
+        Strm << ' ';
+        }
+        return Strm;
   }
